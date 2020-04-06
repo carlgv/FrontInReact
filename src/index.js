@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Header from './Components/Header/header-index';
+import Footer from './Components/Footer/index-footer';
 import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Header/>
+    <Footer/>
   </React.StrictMode>,
   document.getElementById('root')
 );
