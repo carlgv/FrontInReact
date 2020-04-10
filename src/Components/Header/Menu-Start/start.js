@@ -12,7 +12,7 @@ class Start extends Component {
     };
     render() {
         let props = {
-            Usuario: this.GetUserFromSession()
+            Usuario: this.GetUserFromSession
         }
         return templateLogged(props);
     };
