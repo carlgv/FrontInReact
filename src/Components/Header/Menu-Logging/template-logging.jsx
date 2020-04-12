@@ -1,8 +1,32 @@
 import React from 'react';
 
-export default (props) =>
-(
-<nav className="navbar navbar-expand-lg navbar-light bg-light">
+function Form(props) {
+    if (props.dataProp.isLogged === false) {
+        return (<form onSubmit={props.dataProp.onSubmit} className="form-inline">
+            <div className="input-group">
+                <input type="text" name="username" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+            </div>
+            <div className="input-group">
+                <input type="password" name="password" className="form-control" placeholder="password" aria-label="password" aria-describedby="basic-addon1" />
+            </div>
+            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Entrar</button>
+        </form>)
+    }
+    return null; 
+}
+
+function Welcome(props){
+    if (props.dataProp.isLogged) {
+        return (<p>
+            Bienvenido {props.dataProp.Usuario.Nombre}
+        </p>)
+    }
+    return null;
+}
+
+export default (props) =>{
+    return (
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="#">Navbar</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
@@ -33,15 +57,8 @@ export default (props) =>
                         <a className="nav-link disabled" href="#">Disabled</a>
                     </li>
                 </ul>
-                <form onSubmit={props.onSubmit} className="form-inline">
-                    <div className="input-group">
-                        <input type="text" name="username" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
-                    </div>
-                    <div className="input-group">
-                        <input type="password" name="password" className="form-control" placeholder="password" aria-label="password" aria-describedby="basic-addon1" />
-                    </div>
-                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Entrar</button>
-                </form>
+                <Form dataProp={props}/>
+                <Welcome dataProp={props}/>
             </div>
-        
-    </nav>);
+        </nav>)
+};
