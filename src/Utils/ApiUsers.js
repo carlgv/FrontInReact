@@ -16,9 +16,21 @@ class ApiUsers extends React.Component {
             type: 'POST',
             contentType:'application/json',
             crossDomain:true,
-            error:function(){alert('Ha ocurrido un error, intentelo de nuevo')},
+            error:function(){alert('Ha ocurrido un error, intentelo de nuevo')}
           })
     };
+
+    CheckSession = (token)=>{
+        var t = JSON.stringify({"token":token})
+        return $.ajax({
+            url: this.uri+"CheckSession",
+            data: t,
+            type: 'POST',
+            contentType:'application/json',
+            crossDomain:true,
+            error:function(){alert('Ha ocurrido un error, intentelo de nuevo')}
+          })
+    }
 
     GetAllUsers = ()=>{
         return $.ajax({
@@ -33,7 +45,7 @@ class ApiUsers extends React.Component {
 
     GetUserById = (id)=>{
         return $.ajax({
-            url: this.uri+id,
+            url: this.uri+"GetUserById/"+id,
             type: 'GET',
             contentType: 'application/json',
             crossDomain:true,
@@ -43,7 +55,7 @@ class ApiUsers extends React.Component {
 
     GetUserByEmail = (email)=>{
         return $.ajax({
-            url: this.uri+email,
+            url: this.uri+"GetUserItemByEmail/"+email,
             type: 'GET',
             contentType: 'application/json',
             crossDomain:true,
@@ -51,12 +63,20 @@ class ApiUsers extends React.Component {
           })
     }
 
-    UpdateUser = (data)=>{
+    UpdateUser = (userToUpdate)=>{
+        return $.ajax({
+            url: this.uri+"UpdateUser",
+            data: userToUpdate,
+            type: 'POST',
+            contentType:'application/json',
+            crossDomain:true,
+            error:function(){alert('Ha ocurrido un error, intentelo de nuevo')}
+          })
     }
 
-    DeleteUser = (data)=>{}
+    DeleteUser = ()=>{}
 
-    CreateUser = (data)=>{
+    CreateUser = ()=>{
     }
 
 }

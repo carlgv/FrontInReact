@@ -1,25 +1,32 @@
 import React from 'react';
 
 function Form(props) {
-    if (props.dataProp.isLogged === false) {
-        return (<form onSubmit={props.dataProp.onSubmit} className="form-inline">
-            <div className="input-group">
-                <input type="text" name="username" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
-            </div>
-            <div className="input-group">
-                <input type="password" name="password" className="form-control" placeholder="password" aria-label="password" aria-describedby="basic-addon1" />
-            </div>
-            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Entrar</button>
-        </form>)
-    }
-    return null; 
+    if (props.isLogged === false) {
+        return (
+            <form onSubmit={props.onSubmit} className="form-inline">
+                <div className="input-group">
+                    <input type="text" name="email" className="form-control" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" />
+                </div>
+                <div className="input-group">
+                    <input type="password" name="password" className="form-control" placeholder="password" aria-label="password" aria-describedby="basic-addon1" />
+                </div>
+                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Entrar</button>
+            </form>
+        ); 
+    };
+    return null;
 }
 
-function Welcome(props){
-    if (props.dataProp.isLogged) {
-        return (<p>
-            Bienvenido {props.dataProp.Usuario.Nombre}
-        </p>)
+function Welcome(props) {
+    if (props.isLogged) {
+        return (
+            <div className="d-block">
+                <span>
+                    Bienvenido {props.Company.Empresa}
+                </span>
+                <button onClick={props.onLogOut} className="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+            </div>
+        )
     }
     return null;
 }
@@ -57,8 +64,8 @@ export default (props) =>{
                         <a className="nav-link disabled" href="#">Disabled</a>
                     </li>
                 </ul>
-                <Form dataProp={props}/>
-                <Welcome dataProp={props}/>
+                <Form onSubmit={props.onSubmit} isLogged={props.isLogged} />
+                <Welcome isLogged={props.isLogged} Company={props.Company} onLogOut={props.onLogOut}/>
             </div>
         </nav>)
 };
