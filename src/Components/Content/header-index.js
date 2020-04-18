@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from 'react';
-import templateLogging from './Menu-Logging/template-logging';
-import UserApi from '../../Utils/ApiUsers';
+import React from 'react';
+import templateLogging from './header-template';
+import UserApi from '../../Utils/ApiLogin';
 import UserLogin from '../../Utils/UserLogin';
 import Cookies from "js-cookie";
 
