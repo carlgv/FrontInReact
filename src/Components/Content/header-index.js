@@ -1,6 +1,6 @@
 import React from 'react';
 import templateLogging from './header-template';
-import UserApi from '../../Utils/ApiLogin';
+import LoginApi from '../../Utils/ApiLogin';
 import UserLogin from '../../Utils/UserLogin';
 import Cookies from "js-cookie";
 
@@ -20,8 +20,8 @@ class Header extends React.Component {
   };
 
   Logging = (response) => {
-    if(response?.Error !== undefined){
-      alert(response.Error);
+    if(response?.Status !== undefined){
+      alert(response.Status);
       return;
     }
     this.SetUserCookie(JSON.stringify(response));
@@ -45,15 +45,15 @@ class Header extends React.Component {
   componentDidMount() {
     var user = UserLogin.GetUserFromCookie();
     if(user !== null){
-      UserApi.CheckSession(user.Token).then(response => {
+      LoginApi.CheckSession(user.Token).then(response => {
         if (response) {
           this.Logging(user);
         }else{
           alert("Your Session has expired");
+          this.SetUserCookie(null);
         }
       });
     }
-    
   };
 
   render() {

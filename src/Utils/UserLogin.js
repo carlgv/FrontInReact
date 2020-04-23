@@ -1,7 +1,6 @@
 import React from 'react';
 import Cookies from "js-cookie";
 import UserApi from './ApiLogin';
-import GenericUtils from './GenericUtils';
 
 class UserLogin extends React.Component {
 
@@ -30,10 +29,14 @@ class UserLogin extends React.Component {
       'email': event.target.email.value,
       'password': event.target.password.value
     });
-    GenericUtils.SetFormLogin(event);
+    this.SetFormLogin(event);
     return data;
   }
 
+  SetFormLogin = (event) =>{
+    event.target.email.value = "";
+    event.target.password.value = "";
+  }
 
   CheckSession = () => {
     var user = this.GetUserFromCookie();

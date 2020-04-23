@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 class ApiUser extends React.Component {
 
@@ -15,7 +16,6 @@ class ApiUser extends React.Component {
             crossDomain: true,
             error: function () { alert('No eres un usuario autorizado') },
         });
-
     }
 
     GetUserById = (id) => {
@@ -28,13 +28,14 @@ class ApiUser extends React.Component {
         });
     }
 
-    GetUserByEmail = (email) => {
+    GetUserByEmail = (email,token) => {
         return $.ajax({
             url: this.uriApiUser + "GetUserItemByEmail/" + email,
             type: 'GET',
             contentType: 'application/json',
             crossDomain: true,
-            error: function () { alert('No eres un usuario autorizado') },
+            headers: {"Authorization": token},
+            error: function (response) { alert(response) },
         });
     }
 
@@ -63,4 +64,4 @@ class ApiUser extends React.Component {
     }
 
 }
-export default new ApiUser;
+export default new ApiUser();

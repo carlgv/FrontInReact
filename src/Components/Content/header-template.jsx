@@ -1,6 +1,8 @@
 import React from 'react';
 import FormUser from '../Forms/form-index';
 import Home from '../Home/home-index';
+import User from '../Users/index-user';
+import PageNotFound from './../pageNotFound';
 
 import {
     BrowserRouter as Router,
@@ -12,15 +14,31 @@ import {
 function Form(props) {
     if (props.isLogged === false) {
         return (
-            <form onSubmit={props.onSubmit} className="form-inline">
-                <div className="input-group">
-                    <input type="text" name="email" className="form-control" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" />
+            <div>
+                <div className="btn-group" >
+                    <button type="button" className="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Iniciar sesion
+                    </button>
+                    <div id="formLogin" className="dropdown-menu dropdown-menu-right mt-2" >
+                        <span  className="dropdown-item" >
+                        <form onSubmit={props.onSubmit}>
+                            <div className="form-group">
+                                <input type="text" name="email" className="form-control" style={{width:300+'px'}} placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required/>
+                            </div>
+                            <div className="form-group">
+                                <input type="password" name="password" className="form-control" placeholder="password" aria-label="password" aria-describedby="basic-addon1" required/>
+                            </div>
+                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Entrar</button>
+                        </form>
+                        </span>
+                    </div>
                 </div>
-                <div className="input-group">
-                    <input type="password" name="password" className="form-control" placeholder="password" aria-label="password" aria-describedby="basic-addon1" />
+                <div className="btn-group" >
+                    <Link to="/FormUser" className="nav-link">
+                        <button className="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit">Registrate</button>
+                    </Link>
                 </div>
-                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Entrar</button>
-            </form>
+            </div>
         );
     };
     return null;
@@ -33,7 +51,15 @@ function Welcome(props) {
                 <span>
                     Bienvenido {props.Company.Empresa}
                 </span>
-                <button onClick={props.onLogOut} className="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+                <Link to="/">
+                    <button onClick={props.onLogOut} className="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+                </Link>
+
+                <Link to={"/User/" + props.Company.Empresa}>
+                    <button className="btn btn-outline-success my-2 my-sm-0" type="button">
+                        Perfil
+                        </button>
+                </Link>
             </div>
         )
     }
@@ -44,7 +70,7 @@ export default (props) => {
     return (
         <Router>
             <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <a className="navbar-brand" href="#">Navbar</a>
+                <Link to="/" className="navbar-brand" >Emprede fruits</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -54,23 +80,6 @@ export default (props) => {
                             <Link to="/" className="nav-link">Home<span className="sr-only">
                                 (current)</span>
                             </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/FormUser" className="nav-link">Register</Link>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown
-                        </a>
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="#">Action</a>
-                                <a className="dropdown-item" href="#">Another action</a>
-                                <div className="dropdown-divider"></div>
-                                <a className="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link disabled" href="#">Disabled</a>
                         </li>
                     </ul>
                     <Form onSubmit={props.onSubmit} isLogged={props.isLogged} />
@@ -83,6 +92,12 @@ export default (props) => {
                 </Route>
                 <Route path="/FormUser">
                     <FormUser />
+                </Route>
+                <Route path={"/User/" + props.Company.Empresa}>
+                    <User />
+                </Route>
+                <Route path='*' exact={true}>
+                    <PageNotFound />
                 </Route>
             </Switch>
         </Router>

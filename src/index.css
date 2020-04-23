@@ -14,10 +14,15 @@ code {
     monospace;
 }
 
+body #container{
+  display: block; 
+  height: 100%;
+}
+
 .customContainer {
   padding-top: 80px;
-  height:auto;
-  width: 80%;
+  height:100%;
+  width: 50%;
   margin:auto;
   bottom: 0;
 }
@@ -33,8 +38,10 @@ code {
 }
 
 .customHome {
-  padding-top: 80px;
-
+  position:fixed;
+  padding-top: 10px;
+  height:100%;
+  width: 100%;
 }
 
 .customImageHome {
@@ -42,8 +49,6 @@ code {
   -webkit-background-size: 100%;
   -moz-background-size: 100%;
   -o-background-size: 100%;
-  background-size: 100em;
+  background-size: cover;
   height: 100%;
-  width: 100% ;
-  text-align: center;
 }
