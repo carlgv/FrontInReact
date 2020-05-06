@@ -3,13 +3,14 @@ import templateLogging from './header-template';
 import LoginApi from '../../Utils/ApiLogin';
 import UserLogin from '../../Utils/UserLogin';
 import Cookies from "js-cookie";
+import GenericUtil from './../../Utils/GenericUtils';
 
 class Header extends React.Component {
   constructor() {
     super();
     this.handleSubmitLogging = this.handleSubmitLogging.bind(this);
     this.LogOut = this.LogOut.bind(this);
-    this.state = {isLogged: false};
+    this.state = { isLogged: false, redirect: false };
     this.company = {};
   }
 
@@ -20,38 +21,40 @@ class Header extends React.Component {
   };
 
   Logging = (response) => {
-    if(response?.Status !== undefined){
+    if (response?.Status !== undefined) {
       alert(response.Status);
       return;
     }
-    this.SetUserCookie(JSON.stringify(response));
-    this.company = response;
+    this.SetCookies(response);
+    this.company = response.User;
     this.setState({ isLogged: true });
   };
 
-  LogOut = function(){
-    this.setState({ isLogged: false, Company:{}});
-    this.SetUserCookie(null);
+  LogOut = function () {
+    this.setState({ isLogged: false , redirect : true});
+    this.SetCookies(null);
   };
 
-  SetUserCookie = (response) => {
-    if (response !== null || response !== undefined) {
-      Cookies.set('Company', response,{expires:7});
-    }else{
-      Cookies.set('Company',response);
-    }
+
+  SetCookies = (response) => { 
+    Cookies.set('Company', response?.User, { expires: 7 }); 
+    Cookies.set('Token', response?.Token, { expires: 7 }); 
   }
 
   componentDidMount() {
-    var user = UserLogin.GetUserFromCookie();
-    if(user !== null){
-      LoginApi.CheckSession(user.Token).then(response => {
+    var token = GenericUtil.GetTokenFromCookie();
+    this.company = GenericUtil.GetCompanyFromCookie();
+    
+    if (token !== "null" && token !== "undefined") {
+      
+      LoginApi.CheckSession(token)
+      .then(response => {
         if (response) {
-          this.Logging(user);
-        }else{
-          alert("Your Session has expired");
-          this.SetUserCookie(null);
-        }
+          this.setState({ isLogged: response });
+      }})
+      .fail(response => {
+        alert("Your Session has expired");
+        this.LogOut();
       });
     }
   };

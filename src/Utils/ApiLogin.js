@@ -21,14 +21,12 @@ class ApiLogin extends React.Component {
     };
 
     CheckSession = (token)=>{
-        var t = JSON.stringify({"token":token})
         return $.ajax({
             url: this.uriCheckLogin+"CheckSession",
-            data: t,
             type: 'POST',
             contentType:'application/json',
-            crossDomain:true,
-            error:function(){alert('Ha ocurrido un error, intentelo de nuevo')}
+            headers: {"Authorization": 'Bearer '+token},
+            crossDomain:true
           });
     }
 }

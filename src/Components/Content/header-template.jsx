@@ -19,17 +19,22 @@ function Form(props) {
                     <button type="button" className="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Iniciar sesion
                     </button>
-                    <div id="formLogin" className="dropdown-menu dropdown-menu-right mt-2" >
-                        <span  className="dropdown-item" >
-                        <form onSubmit={props.onSubmit}>
-                            <div className="form-group">
-                                <input type="text" name="email" className="form-control" style={{width:300+'px'}} placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required/>
-                            </div>
-                            <div className="form-group">
-                                <input type="password" name="password" className="form-control" placeholder="password" aria-label="password" aria-describedby="basic-addon1" required/>
-                            </div>
-                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Entrar</button>
-                        </form>
+                    <div id="formLogin" className="dropdown-menu dropdown-customMenu mt-2" >
+                        <span className="dropdown-item" >
+                            <form onSubmit={props.onSubmit}>
+                                <div className="form-group">
+                                    <label htmlFor="email">Email</label>
+                                    <input type="text" name="email" className="form-control" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="password">Contraseña</label>
+                                    <input type="password" name="password" className="form-control" placeholder="password" aria-label="password" aria-describedby="basic-addon1" required />
+                                </div>
+                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Entrar</button>
+                                <span>
+                                    <a href="#" style={{ marginLeft: 10 + 'px' }}>Olvidaste la contraseña?</a>
+                                </span>
+                            </form>
                         </span>
                     </div>
                 </div>
@@ -48,14 +53,14 @@ function Welcome(props) {
     if (props.isLogged) {
         return (
             <div className="d-block">
-                <span>
+                <span className="text-white" style={{ marginRight: 10 + 'px' }}>
                     Bienvenido {props.Company.Empresa}
                 </span>
                 <Link to="/">
-                    <button onClick={props.onLogOut} className="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+                    <button onClick={props.onLogOut} style={{ marginRight: 10 + 'px' }} className="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
                 </Link>
 
-                <Link to={"/User/" + props.Company.Empresa}>
+                <Link to={"/" + props.Company.Empresa}>
                     <button className="btn btn-outline-success my-2 my-sm-0" type="button">
                         Perfil
                         </button>
@@ -63,12 +68,12 @@ function Welcome(props) {
             </div>
         )
     }
-    return null;
+return null;
 }
 
 export default (props) => {
     return (
-        <Router>
+        <Router forceRefresh={true}>
             <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <Link to="/" className="navbar-brand" >Emprede fruits</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,10 +98,10 @@ export default (props) => {
                 <Route path="/FormUser">
                     <FormUser />
                 </Route>
-                <Route path={"/User/" + props.Company.Empresa}>
-                    <User />
+                <Route path={"/"+ props.Company?.Empresa}>
+                    {props.isLogged ? <User /> : <Home />}
                 </Route>
-                <Route path='*' exact={true}>
+                <Route exact={true} path="*">
                     <PageNotFound />
                 </Route>
             </Switch>

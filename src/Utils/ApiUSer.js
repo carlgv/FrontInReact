@@ -39,12 +39,13 @@ class ApiUser extends React.Component {
         });
     }
 
-    UpdateUser = (userToUpdate) => {
+    UpdateUser = (userToUpdate,token) => {
         return $.ajax({
             url: this.uriApiUser + "UpdateUser",
             data: userToUpdate,
             type: 'POST',
             contentType: 'application/json',
+            headers: {"Authorization": 'Bearer '+token},
             crossDomain: true,
             error: function () { alert('Ha ocurrido un error, intentelo de nuevo') }
         });
@@ -62,6 +63,5 @@ class ApiUser extends React.Component {
             error: function () { alert('Ha ocurrido un error, intentelo de nuevo') }
         });
     }
-
 }
 export default new ApiUser();

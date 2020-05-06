@@ -1,26 +1,17 @@
 import React from 'react';
-import Cookies from "js-cookie";
-import UserApi from './ApiLogin';
+import LoginApi from './ApiLogin';
+import GenericUtil from './GenericUtils';
 
 class UserLogin extends React.Component {
 
   constructor() {
     super();
     this.CheckUserLogin = this.CheckUserLogin.bind(this);
-    this.GetUserFromCookie = this.GetUserFromCookie.bind(this);
-  }
-
-  GetUserFromCookie = () => {
-    var company = Cookies.get('Company');
-    if (company !== "null" && company !== undefined) {
-      return JSON.parse(company);
-    }
-    return null;
   }
 
   CheckUserLogin = (event) => {
     var company = this.GetDataUserLogin(event);
-    return UserApi.CheckUser(company);
+    return LoginApi.CheckUser(company);
   }
 
   GetDataUserLogin = (event) => {
@@ -39,9 +30,9 @@ class UserLogin extends React.Component {
   }
 
   CheckSession = () => {
-    var user = this.GetUserFromCookie();
-    if (user !== null) {
-      UserApi.CheckSession(user.Token);
+    var token = GenericUtil.GetTokenFromCookie();
+    if (token !== null) {
+      LoginApi.CheckSession(token);
     }
   }
 
