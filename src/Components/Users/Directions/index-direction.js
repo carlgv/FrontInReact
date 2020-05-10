@@ -7,6 +7,7 @@ class Direction extends React.Component{
     }
 
     componentDidMount(){
+        
 
     }
 

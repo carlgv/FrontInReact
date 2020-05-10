@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginApi from './ApiLogin';
-import GenericUtil from './GenericUtils';
+import GenericUtil from '../GenericUtils';
 
 class UserLogin extends React.Component {
 

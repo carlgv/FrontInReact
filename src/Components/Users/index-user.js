@@ -1,7 +1,7 @@
 import React from 'react';
 import templateUser from './template-user';
 import ValidateForms from '../../Utils/ValidateForms';
-import UserRegister from '../../Utils/UserRegister';
+import UserRegister from '../../Utils/User/UserRegister';
 import Cookies from "js-cookie";
 import GenericUtil from './../../Utils/GenericUtils';
 

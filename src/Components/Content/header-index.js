@@ -1,7 +1,7 @@
 import React from 'react';
 import templateLogging from './header-template';
-import LoginApi from '../../Utils/ApiLogin';
-import UserLogin from '../../Utils/UserLogin';
+import LoginApi from '../../Utils/Login/ApiLogin';
+import UserLogin from '../../Utils/Login/UserLogin';
 import Cookies from "js-cookie";
 import GenericUtil from './../../Utils/GenericUtils';
 

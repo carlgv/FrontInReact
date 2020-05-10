@@ -1,6 +1,6 @@
 import React from 'react';
 import templateFormUser from './template-form-user';
-import UserRegister from './../../Utils/UserRegister';
+import UserRegister from '../../Utils/User/UserRegister';
 import { Redirect } from 'react-router-dom';
 import Home from '../Home/home-index';
 import ValidateForms from '../../Utils/ValidateForms';

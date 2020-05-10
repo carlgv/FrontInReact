@@ -1,6 +1,6 @@
 import React from 'react';
 import ApiUser from './ApiUSer';
-import GenericUtil from './../Utils/GenericUtils';
+import GenericUtil from '../GenericUtils';
 
 
 class UserRegister extends React.Component {
