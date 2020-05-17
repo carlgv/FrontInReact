@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import GenericUtil from './../GenericUtils';
 
 
 class ApiLogin extends React.Component {
@@ -26,7 +27,10 @@ class ApiLogin extends React.Component {
             type: 'POST',
             contentType:'application/json',
             headers: {"Authorization": 'Bearer '+token},
-            crossDomain:true
+            crossDomain:true,
+            error: function (jqXHR, exception) {
+                GenericUtil.FailStatusResponse(jqXHR);
+            }
           });
     }
 }

@@ -1,36 +1,70 @@
 import React from 'react';
-import DataUser from './data-user'; 
+import DataUser from './data-user';
 import Direction from './Directions/index-direction';
 import Invoice from './Invoices/index-invoice';
+import Contact from './Contact/index-contact';
+
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 export default (props) => {
 
     if (props.Company != null) {
         return (
-            <div className="customContainer">
-                <ul className="nav nav-tabs" id="myTab" role="tablist">
-                    <li className="nav-item">
-                        <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Tus datos</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Direcciones</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Facturas</a>
-                    </li>
-                </ul>
-                <div className="tab-content" id="myTabContent">
-                    <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <DataUser values={props} />
-                    </div>
-                    <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                      <Direction />
-                    </div>
-                    <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <Invoice />
-                    </div>
+            <Router>
+                <div className="customContainer">
+                    <ul className="nav nav-tabs">
+                        <li className="nav-item active">
+                            <Link className="nav-link" to="/Perfil/Empresa">
+                                Empresa
+                        </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/Perfil/Contacto">
+                                Contacto
+                           </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/Perfil/Direcciones">
+                                Direcciones
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/Perfil/Facturas">
+                                Facturas
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
-            </div>
+                <Switch>
+                    <Route path="/Perfil/Empresa">
+                        <div className="customContainer">
+                            <DataUser values={props} />
+                        </div>
+                    </Route>
+                    <Route path="/Perfil/Contacto">
+                        <div className="customContainer">
+                            <Contact />
+                        </div>
+                    </Route>
+                    <Route path="/Perfil/Direcciones">
+                        <div className="customContainer">
+                            <Direction />
+                        </div>
+                    </Route>
+                    <Route path="/Perfil/Facturas">
+                        <div className="customContainer">
+                            <Invoice />
+                        </div>
+                    </Route>
+                </Switch>
+                
+            </Router>
         );
     }
     return null;

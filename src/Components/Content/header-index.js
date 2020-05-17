@@ -2,7 +2,6 @@ import React from 'react';
 import templateLogging from './header-template';
 import LoginApi from '../../Utils/Login/ApiLogin';
 import UserLogin from '../../Utils/Login/UserLogin';
-import Cookies from "js-cookie";
 import GenericUtil from './../../Utils/GenericUtils';
 
 class Header extends React.Component {
@@ -25,21 +24,15 @@ class Header extends React.Component {
       alert(response.Status);
       return;
     }
-    this.SetCookies(response);
+    GenericUtil.SetCookies(response);
     this.company = response.User;
     this.setState({ isLogged: true });
   };
 
   LogOut = function () {
     this.setState({ isLogged: false , redirect : true});
-    this.SetCookies(null);
+    GenericUtil.SetCookies(null);
   };
-
-
-  SetCookies = (response) => { 
-    Cookies.set('Company', response?.User, { expires: 7 }); 
-    Cookies.set('Token', response?.Token, { expires: 7 }); 
-  }
 
   componentDidMount() {
     var token = GenericUtil.GetTokenFromCookie();
@@ -53,7 +46,6 @@ class Header extends React.Component {
           this.setState({ isLogged: response });
       }})
       .fail(response => {
-        alert("Your Session has expired");
         this.LogOut();
       });
     }

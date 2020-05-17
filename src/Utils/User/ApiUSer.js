@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import GenericUtil from './../GenericUtils';
 
 class ApiUser extends React.Component {
 
@@ -14,9 +15,11 @@ class ApiUser extends React.Component {
             type: 'GET',
             contentType: 'application/json',
             crossDomain: true,
-            error: function () { alert('No eres un usuario autorizado') },
+            error: function (jqXHR, exception) {
+                GenericUtil.FailStatusResponse(jqXHR);
+            }
         });
-    }
+    };
 
     GetUserById = (id) => {
         return $.ajax({
@@ -24,9 +27,11 @@ class ApiUser extends React.Component {
             type: 'GET',
             contentType: 'application/json',
             crossDomain: true,
-            error: function () { alert('No eres un usuario autorizado') },
+            error: function (jqXHR, exception) {
+                GenericUtil.FailStatusResponse(jqXHR);
+            },
         });
-    }
+    };
 
     GetUserByEmail = (email,token) => {
         return $.ajax({
@@ -35,9 +40,24 @@ class ApiUser extends React.Component {
             contentType: 'application/json',
             crossDomain: true,
             headers: {"Authorization": token},
-            error: function (response) { alert(response) },
+            error: function (jqXHR, exception) {
+                GenericUtil.FailStatusResponse(jqXHR);
+            }
         });
-    }
+    };
+
+    CreateUser = (userToAdd) => {
+        return $.ajax({
+            url: this.uriApiUser + "AddUser",
+            data: userToAdd,
+            type: 'POST',
+            contentType: 'application/json',
+            crossDomain: true,
+            error: function (jqXHR, exception) {
+                GenericUtil.FailStatusResponse(jqXHR);
+            }
+        });
+    };
 
     UpdateUser = (userToUpdate,token) => {
         return $.ajax({
@@ -47,21 +67,14 @@ class ApiUser extends React.Component {
             contentType: 'application/json',
             headers: {"Authorization": 'Bearer '+token},
             crossDomain: true,
-            error: function () { alert('Ha ocurrido un error, intentelo de nuevo') }
+            error: function (jqXHR, exception) {
+                GenericUtil.FailStatusResponse(jqXHR);
+            }
         });
-    }
+    };
 
     DeleteUser = () => { }
 
-    CreateUser = (userToAdd) => {
-        return $.ajax({
-            url: this.uriApiUser + "AddUser",
-            data: userToAdd,
-            type: 'POST',
-            contentType: 'application/json',
-            crossDomain: true,
-            error: function () { alert('Ha ocurrido un error, intentelo de nuevo') }
-        });
-    }
+    
 }
 export default new ApiUser();

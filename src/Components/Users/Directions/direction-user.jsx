@@ -15,7 +15,7 @@ export default () => {
                 </div>
                 <div className="form-group" >
                     <label htmlFor="nif">NIF</label>
-                    <textarea type="text" rows="1" id="nif" maxLength="9" className="form-control upperCase" name="nif" placeholder="Número de identificación fiscal" required />
+                    <textarea type="text" rows="1" id="nif" minLength="9" maxLength="9" className="form-control upperCase" name="nif" placeholder="Número de identificación fiscal" required />
                 </div>
                 <button type="submit" className="btn btn-primary">Guardar cambios</button>
                 <span className="pointer btn btn-primary">Editar datos</span>

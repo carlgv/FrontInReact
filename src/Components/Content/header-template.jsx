@@ -60,7 +60,7 @@ function Welcome(props) {
                     <button onClick={props.onLogOut} style={{ marginRight: 10 + 'px' }} className="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
                 </Link>
 
-                <Link to={"/" + props.Company.Empresa}>
+                <Link to={"/Perfil/Empresa"}>
                     <button className="btn btn-outline-success my-2 my-sm-0" type="button">
                         Perfil
                         </button>
@@ -98,7 +98,7 @@ export default (props) => {
                 <Route path="/FormUser">
                     <FormUser />
                 </Route>
-                <Route path={"/"+ props.Company?.Empresa}>
+                <Route path={"/Perfil/Empresa"}>
                     {props.isLogged ? <User /> : <Home />}
                 </Route>
                 <Route exact={true} path="*">
