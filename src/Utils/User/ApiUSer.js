@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import GenericUtil from './../GenericUtils';
+import {FailStatusResponse} from './../GenericUtils';
 
 class ApiUser extends React.Component {
 
@@ -16,7 +16,7 @@ class ApiUser extends React.Component {
             contentType: 'application/json',
             crossDomain: true,
             error: function (jqXHR, exception) {
-                GenericUtil.FailStatusResponse(jqXHR);
+                FailStatusResponse(jqXHR);
             }
         });
     };
@@ -28,7 +28,7 @@ class ApiUser extends React.Component {
             contentType: 'application/json',
             crossDomain: true,
             error: function (jqXHR, exception) {
-                GenericUtil.FailStatusResponse(jqXHR);
+                FailStatusResponse(jqXHR);
             },
         });
     };
@@ -41,7 +41,7 @@ class ApiUser extends React.Component {
             crossDomain: true,
             headers: {"Authorization": token},
             error: function (jqXHR, exception) {
-                GenericUtil.FailStatusResponse(jqXHR);
+                FailStatusResponse(jqXHR);
             }
         });
     };
@@ -54,7 +54,7 @@ class ApiUser extends React.Component {
             contentType: 'application/json',
             crossDomain: true,
             error: function (jqXHR, exception) {
-                GenericUtil.FailStatusResponse(jqXHR);
+                FailStatusResponse(jqXHR);
             }
         });
     };
@@ -68,7 +68,7 @@ class ApiUser extends React.Component {
             headers: {"Authorization": 'Bearer '+token},
             crossDomain: true,
             error: function (jqXHR, exception) {
-                GenericUtil.FailStatusResponse(jqXHR);
+               FailStatusResponse(jqXHR);
             }
         });
     };

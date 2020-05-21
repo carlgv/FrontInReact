@@ -27,6 +27,18 @@ body #container{
   bottom: 0;
 }
 
+.customContainerUser{
+  height:100%;
+  width: 50%;
+  margin:auto;
+  bottom: 0;
+}
+
+.customForm{
+  margin-left: 10px !important;
+  margin-top: 20px !important;
+}
+
 .customFooter {
   position: fixed;
   bottom: 0;

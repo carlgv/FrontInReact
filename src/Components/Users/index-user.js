@@ -1,9 +1,9 @@
 import React from 'react';
-import templateUser from './template-user';
+import templateUser from './data-user';
 import ValidateForms from '../../Utils/ValidateForms';
 import UserRegister from '../../Utils/User/UserRegister';
 import Cookies from "js-cookie";
-import GenericUtil from './../../Utils/GenericUtils';
+import {GetCompanyFromCookie} from './../../Utils/GenericUtils';
 
 class User extends React.Component {
 
@@ -34,7 +34,7 @@ class User extends React.Component {
             UserRegister.UpdateUser(event).then(response => {
                 if(response !== "UnexpectedError" && response !== "NoChange"){
                     Cookies.set('Company', response ,{expires:7});
-                    alert("Se han guardado los cambios")
+                    alert("Se han guardado los cambios");
                 }else{
                     alert(response);
                 }
@@ -51,7 +51,7 @@ class User extends React.Component {
     }
 
     componentDidMount() {
-        var empresa = GenericUtil.GetCompanyFromCookie();
+        var empresa = GetCompanyFromCookie();
         if (empresa !== "null" && empresa !== undefined ) {
             this.setState({ Company: empresa });
         }

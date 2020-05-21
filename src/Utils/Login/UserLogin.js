@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginApi from './ApiLogin';
-import GenericUtil from '../GenericUtils';
+import {GetTokenFromCookie} from './../GenericUtils';
 
 class UserLogin extends React.Component {
 
@@ -30,7 +30,7 @@ class UserLogin extends React.Component {
   }
 
   CheckSession = () => {
-    var token = GenericUtil.GetTokenFromCookie();
+    var token = GetTokenFromCookie();
     if (token !== null) {
       LoginApi.CheckSession(token);
     }

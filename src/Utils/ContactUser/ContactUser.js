@@ -1,13 +1,13 @@
 import React from 'react';
 import ApiContactUser from './ApiContactUser';
-import GenericUtil from '../GenericUtils';
+import {GetTokenFromCookie,GetCompanyFromCookie} from './../GenericUtils';
 
 class UserContactRegister extends React.Component {
 
     GetDataFromCookies = ()=>{
         return {
-            'token': GenericUtil.GetTokenFromCookie(),
-            'company': GenericUtil.GetCompanyFromCookie()
+            'token': GetTokenFromCookie(),
+            'company': GetCompanyFromCookie()
         };
     };
 

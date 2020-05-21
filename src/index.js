@@ -8,8 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Header/>
-    <Footer/>
+      <Header />
+      <Footer />
   </React.StrictMode>,
   document.getElementById('root')
 );

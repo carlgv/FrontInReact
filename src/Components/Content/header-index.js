@@ -2,7 +2,7 @@ import React from 'react';
 import templateLogging from './header-template';
 import LoginApi from '../../Utils/Login/ApiLogin';
 import UserLogin from '../../Utils/Login/UserLogin';
-import GenericUtil from './../../Utils/GenericUtils';
+import {GetTokenFromCookie,GetCompanyFromCookie,SetCookies} from './../../Utils/GenericUtils';
 
 class Header extends React.Component {
   constructor() {
@@ -24,19 +24,19 @@ class Header extends React.Component {
       alert(response.Status);
       return;
     }
-    GenericUtil.SetCookies(response);
+    SetCookies(response);
     this.company = response.User;
     this.setState({ isLogged: true });
   };
 
   LogOut = function () {
     this.setState({ isLogged: false , redirect : true});
-    GenericUtil.SetCookies(null);
+    SetCookies(null);
   };
 
   componentDidMount() {
-    var token = GenericUtil.GetTokenFromCookie();
-    this.company = GenericUtil.GetCompanyFromCookie();
+    var token = GetTokenFromCookie();
+    this.company = GetCompanyFromCookie();
     
     if (token !== "null" && token !== "undefined") {
       

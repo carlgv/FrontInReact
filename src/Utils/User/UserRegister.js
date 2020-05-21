@@ -1,6 +1,6 @@
 import React from 'react';
 import ApiUser from './ApiUSer';
-import GenericUtil from '../GenericUtils';
+import {GetTokenFromCookie,GetCompanyFromCookie} from './../GenericUtils';
 
 
 class UserRegister extends React.Component {
@@ -27,8 +27,8 @@ class UserRegister extends React.Component {
     }
 
     UpdateUser = (event) => {
-        var token = GenericUtil.GetTokenFromCookie();
-        var empresa = GenericUtil.GetCompanyFromCookie();
+        var token = GetTokenFromCookie();
+        var empresa = GetCompanyFromCookie();
         if(empresa!== null){
             var dataToUpdate = this.GetDataUserUpdate(event,empresa);
             return ApiUser.UpdateUser(dataToUpdate,token);

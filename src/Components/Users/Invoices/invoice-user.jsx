@@ -3,6 +3,7 @@ import React from 'react';
 export default () => {
 
     return (
+        <div className="customContainerUser">
         < div style={{ marginLeft: 10 + 'px', marginTop: 20 + 'px', display: "inline-block" }}>
             <form>
                 <div className="form-group">
@@ -20,6 +21,7 @@ export default () => {
                 <button type="submit" className="btn btn-primary">Guardar cambios</button>
                 <span className="pointer btn btn-primary">Editar datos</span>
             </form>
+        </div >
         </div >
     );
 }

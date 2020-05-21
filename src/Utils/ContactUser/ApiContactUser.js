@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import GenericUtil from './../GenericUtils';
+import {FailStatusResponse} from './../GenericUtils';
 
 
 class ApiContactUser extends React.Component {
@@ -19,7 +19,7 @@ class ApiContactUser extends React.Component {
             crossDomain:true,
             headers: {"Authorization": 'Bearer '+token},
             error: function (jqXHR, exception) {
-                GenericUtil.FailStatusResponse(jqXHR);
+                FailStatusResponse(jqXHR);
             }
           });
     };
@@ -33,7 +33,7 @@ class ApiContactUser extends React.Component {
             headers: {"Authorization": 'Bearer '+token},
             crossDomain:true,
             error: function (jqXHR, exception) {
-                GenericUtil.FailStatusResponse(jqXHR);
+                FailStatusResponse(jqXHR);
             }
           });
     };
@@ -46,7 +46,7 @@ class ApiContactUser extends React.Component {
             headers: {"Authorization": 'Bearer '+token},
             crossDomain:true,
             error: function (jqXHR, exception) {
-                GenericUtil.FailStatusResponse(jqXHR);
+                FailStatusResponse(jqXHR);
             }
           });
     };
@@ -59,7 +59,7 @@ class ApiContactUser extends React.Component {
             headers: {"Authorization": 'Bearer '+token},
             crossDomain:true,
             error: function (jqXHR, exception) {
-                GenericUtil.FailStatusResponse(jqXHR);
+                FailStatusResponse(jqXHR);
             }
           });
     };
@@ -73,7 +73,7 @@ class ApiContactUser extends React.Component {
             headers: {"Authorization": 'Bearer '+token},
             crossDomain:true,
             error: function (jqXHR, exception) {
-                GenericUtil.FailStatusResponse(jqXHR);
+                FailStatusResponse(jqXHR);
             }
           });
     };

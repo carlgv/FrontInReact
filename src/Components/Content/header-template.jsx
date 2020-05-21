@@ -1,7 +1,7 @@
 import React from 'react';
 import FormUser from '../Forms/form-index';
 import Home from '../Home/home-index';
-import User from '../Users/index-user';
+import Perfil from '../Users/template-user';
 import PageNotFound from './../pageNotFound';
 
 import {
@@ -60,7 +60,7 @@ function Welcome(props) {
                     <button onClick={props.onLogOut} style={{ marginRight: 10 + 'px' }} className="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
                 </Link>
 
-                <Link to={"/Perfil/Empresa"}>
+                <Link to={"/Perfil"}>
                     <button className="btn btn-outline-success my-2 my-sm-0" type="button">
                         Perfil
                         </button>
@@ -68,12 +68,12 @@ function Welcome(props) {
             </div>
         )
     }
-return null;
+    return null;
 }
 
 export default (props) => {
     return (
-        <Router forceRefresh={true}>
+        <Router>
             <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <Link to="/" className="navbar-brand" >Emprede fruits</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,14 +92,10 @@ export default (props) => {
                 </div>
             </nav>
             <Switch>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route path="/FormUser">
-                    <FormUser />
-                </Route>
-                <Route path={"/Perfil/Empresa"}>
-                    {props.isLogged ? <User /> : <Home />}
+                <Route exact path="/" component={Home} />
+                <Route path="/FormUser" component={FormUser} />
+                <Route path={"/Perfil"}>
+                    {props.isLogged ? <Perfil values ={props} /> : <Home />}
                 </Route>
                 <Route exact={true} path="*">
                     <PageNotFound />

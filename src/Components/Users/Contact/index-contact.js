@@ -24,6 +24,7 @@ class Contact extends React.Component{
                 if (response !== "UnexpectedError") {
                     var toJson = JSON.parse(response);
                     this.setState({ datos:toJson,Disabled:true});
+                    alert("Se han guardado los cambios");
                 }
             })
     };

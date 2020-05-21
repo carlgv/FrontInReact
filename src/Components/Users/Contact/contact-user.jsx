@@ -17,7 +17,8 @@ function ButtonSave(props) {
 export default (props) => {
     var addOrUpdate = props.datos ? props.updateContact:props.addContact;
     return (
-        < div style={{ marginLeft: 10 + 'px', marginTop: 20 + 'px', display: "inline-block" }}>
+        <div className="customContainerUser">
+        <div style={{ marginLeft: 10 + 'px', marginTop: 20 + 'px', display: "inline-block" }}>
             <form onSubmit={addOrUpdate}>
                 <div className="form-group">
                     <label htmlFor="Nombre">Nombre</label>
@@ -35,5 +36,6 @@ export default (props) => {
                 <ButtonSave data={props.datos} SetDisabled={props.setDisabled}/>
             </form>
         </div >
+        </div>
     );
 }
