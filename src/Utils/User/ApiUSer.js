@@ -9,24 +9,26 @@ class ApiUser extends React.Component {
         this.uriApiUser = "http://service.user.com/Api/Users/";
     }
 
-    GetAllUsers = () => {
+    GetAllUsers = (token) => {
         return $.ajax({
             url: this.uriApiUser + "AllUsers",
             type: 'GET',
             contentType: 'application/json',
             crossDomain: true,
+            headers: {"Authorization": token},
             error: function (jqXHR, exception) {
                 FailStatusResponse(jqXHR);
             }
         });
     };
 
-    GetUserById = (id) => {
+    GetUserById = (id,token) => {
         return $.ajax({
             url: this.uriApiUser + "GetUserById/" + id,
             type: 'GET',
             contentType: 'application/json',
             crossDomain: true,
+            headers: {"Authorization": token},
             error: function (jqXHR, exception) {
                 FailStatusResponse(jqXHR);
             },
@@ -46,12 +48,13 @@ class ApiUser extends React.Component {
         });
     };
 
-    CreateUser = (userToAdd) => {
+    CreateUser = (userToAdd,token) => {
         return $.ajax({
             url: this.uriApiUser + "AddUser",
             data: userToAdd,
             type: 'POST',
             contentType: 'application/json',
+            headers: {"Authorization": token},
             crossDomain: true,
             error: function (jqXHR, exception) {
                 FailStatusResponse(jqXHR);

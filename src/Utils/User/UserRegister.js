@@ -37,8 +37,9 @@ class UserRegister extends React.Component {
     }
 
     CreateUser = (event) => {
+        var token = GetTokenFromCookie();
         var userData = this.GetDataUserRegister(event);
-        return ApiUser.CreateUser(userData);
+        return ApiUser.CreateUser(userData,token);
     }
 
 }

@@ -9,12 +9,9 @@ class Invoice extends React.Component{
     componentDidMount(){
 
     }
-
+    
     render(){
         return TemplateInvoice();
     }
-
-
-
 }
 export default Invoice;
