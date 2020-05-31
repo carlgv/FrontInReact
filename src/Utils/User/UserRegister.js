@@ -15,7 +15,7 @@ class UserRegister extends React.Component {
             'accepted': 0
         });
         return data;
-    }
+    };
 
     GetDataUserUpdate = (event, empresa) => {
         event.preventDefault();
