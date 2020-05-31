@@ -38,7 +38,7 @@ class Header extends React.Component {
     var token = GetTokenFromCookie();
     this.company = GetCompanyFromCookie();
     
-    if (token !== "null" && token !== "undefined") {
+    if (token !== "null" && token !== undefined && token !== "undefined") {
       
       LoginApi.CheckSession(token)
       .then(response => {

@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 
 export function GetCompanyFromCookie(){
     var company = Cookies.get('Company');
-    if (company !== "null" && company !== "undefined") {
+    if (company !== "null" && company !== undefined && company !== "undefined") {
         return JSON.parse(company);
     }
     return null;

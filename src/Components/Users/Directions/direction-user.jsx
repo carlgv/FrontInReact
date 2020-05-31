@@ -1,5 +1,4 @@
 import React from 'react';
-import FormDirection from './formDirection';
 
 export default (props) => {
     return (
@@ -15,7 +14,8 @@ export default (props) => {
                             </h5>
                         </div>
                         <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                            <FormDirection values={props} tipoDireccion={1} />
+                                {props.ComponentFormInvoideDirection}
+                            <button type="button" className={props.ComponentFormInvoideDirection ? "hidden": ""} onClick={props.HandleShowFormInvoiceDirection}>Añadir dirección</button>
                         </div>
                     </div>
                     <div className="card">
@@ -27,8 +27,8 @@ export default (props) => {
                             </h5>
                         </div>
                         <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                            {props.Components?.map((form, index) => <span defaultValue={index} key={index}>{form}</span>)}
-                            <button type="button" onClick={() => props.setShowForm(props)}>Añadir dirección</button>
+                            {props.ComponentsFormDeliveryDirection?.map((form, index) => <span defaultValue={index} key={index}>{form}</span>)}
+                            <button type="button" onClick={props.HandleShowFormDirection}>Añadir dirección</button>
                         </div>
                     </div>
                 </div>

@@ -1,58 +1,82 @@
 import React from 'react';
 import TemplateDirection from './direction-user';
-import FormDirection from './formDirection';
-import UserDirection from './../../../Utils/Direction/UserDirection';
+import FormDirection from '../../Forms/formDirection-index';
+import UserDirection from '../../../Utils/Direction/UserDirection';
+import {GetTowns} from '../../../Utils/Direction/ServiceDirections';
+import $ from 'jquery';
 
-import {GetTownsBarcelona,GetNameTowns} from './../../../Utils/Direction/ServiceDirections';
-import UserRegister from '../../../Utils/User/UserRegister';
-
-class Direction extends React.Component{
+class Direction extends React.Component {
     constructor() {
         super();
-        this.state = {towns :null,directions:[],ComponentsForm:[]}
-        this.ComponentsForm=[];
-        this.Directions=[];
+        this.state = { ComponentsFormDeliveryDirection:null,towns:[],ComponentFormInvoiceDirection:null}
+        this.ComponentsFormDeliveryDirection = [];
     }
 
-    componentDidMount(){
-        GetTownsBarcelona()
-        .done(response => {this.setState({towns:GetNameTowns(response)});});
-
-    }
-
-    setShowForm =(props) =>{
-        this.ComponentsForm.push(<FormDirection values={props} tipoDireccion={0}/>);
-        this.setState({ComponentsForm:this.ComponentsForm});
-    }
-
-    removeItemDirection = (event)=>{
-        var index = this.ComponentsForm?.indexOf(event.currentTarget.form);
-        this.ComponentsForm.splice(index,1);
-        this.setState({ComponentsForm:this.ComponentsForm});
-    }
-
-    AddDirection = (event) => {
-        UserDirection.AddDirection(event).done(
-            response => {
-                if (response !== 'UnexpectedError') {
-                    this.Directions.push(response);
-                    this.setState({ directions: this.Directions });
-                };
-            }
-        );
-    }
-
-
-    render(){
-        let props ={
-            Towns : this.state.towns,
-            Directions : this.state.directions,
-            setShowForm: this.setShowForm,
-            Components:this.state.ComponentsForm,
-            RemoveItem: this.removeItemDirection,
-            AddDirection:this.AddDirection
+    ShowDeliveryDirections = () => {
+        var dataDirection = {
+            TipoDireccion:0
         }
+        this.ComponentsFormDeliveryDirection.push(<FormDirection data={dataDirection} disabled={false}/>);
+        this.setState({ ComponentsFormDeliveryDirection: this.ComponentsFormDeliveryDirection });
+    };
+
+    ShowInvoiceDirection = () => {
+        var dataDirection = {
+            TipoDireccion:1
+        }
+        this.setState({ComponentFormInvoiceDirection:<FormDirection data={dataDirection} disabled={false}/>});
+        return 
+    };
+
+    GetDirectionsUser = () => {
+        UserDirection.GetDirectionsUser().then(response => {
+            if (response !== 'UnexpectedError' && response.length > 3) {
+                var ObjectsToJSON = JSON.parse(response);
+                ObjectsToJSON.forEach(direction => {
+                    var provincia = "";
+
+                    if(provincia !== direction.Provincia){
+                        provincia = direction.Provincia;
+                    };
+
+                    $.when(GetTowns(provincia)).then(towns => {
+                        this.FillTowns(towns);
+                        this.FillDirectionsUser(direction);
+                    });
+
+                });
+            }
+        });
+    };
+
+    FillTowns = (towns) => {
+        var nameTowns = [];
+        towns.elements.map(item => nameTowns.push(item.municipi_nom));
+        nameTowns.sort();
+        this.setState({ towns: nameTowns });
+    };
+
+    FillDirectionsUser = (direction)=> {
+        if (direction.TipoDireccion === 0) {
+            this.ComponentsFormDeliveryDirection.push(<FormDirection data={direction} towns={this.state.towns} disabled={true} />);
+        } else {
+            this.ComponentFormInvoiceDirection = <FormDirection data={direction} towns={this.state.towns} disabled={true} />
+        }
+        this.setState({ ComponentsFormDeliveryDirection: this.ComponentsFormDeliveryDirection, ComponentFormInvoiceDirection: this.ComponentFormInvoiceDirection });
+    };
+
+    componentDidMount() {
+        this.GetDirectionsUser();
+    };
+
+    render() {
+        let props = {
+            HandleShowFormDirection: this.ShowDeliveryDirections,
+            ComponentsFormDeliveryDirection: this.state.ComponentsFormDeliveryDirection,
+            HandleShowFormInvoiceDirection:this.ShowInvoiceDirection,
+            ComponentFormInvoideDirection: this.state.ComponentFormInvoiceDirection
+        };
         return TemplateDirection(props);
-    }
+    };
 }
 export default Direction;

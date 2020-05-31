@@ -7,7 +7,7 @@ class ApiDirection extends React.Component {
     
     constructor() {
         super();
-        this.uriDirection = "http://service.checkuser.com/Api/Directions/";
+        this.uriDirection = "http://service.user.com/Api/Directions/";
     }
     
     AddDirection = (data,token)=>{        
@@ -17,7 +17,7 @@ class ApiDirection extends React.Component {
             type: 'POST',
             contentType:'application/json',
             crossDomain:true,
-            headers: {"Authorization": token},
+            headers: {"Authorization": 'Bearer '+token},
             error: function (jqXHR, exception) {
                 FailStatusResponse(jqXHR);
             }
@@ -26,21 +26,33 @@ class ApiDirection extends React.Component {
 
     UpdateDirection = (data, token)=>{
         return $.ajax({
-            url: this.uriDirection+"CheckSession",
+            url: this.uriDirection+"UpdateDirection",
             data:data,
             type: 'POST',
             contentType:'application/json',
             headers: {"Authorization": 'Bearer '+token},
-            headers: {"Authorization": token},
             crossDomain:true,
             error: function (jqXHR, exception) {
                 FailStatusResponse(jqXHR);
             }
           });
-    }
+    };
+
+    GetDirection = (email, token)=>{
+        return $.ajax({
+            url: this.uriDirection+"GetDirectionsByEmail?email="+email,
+            type: 'GET',
+            contentType:'application/json',
+            headers: {"Authorization": 'Bearer '+token},
+            crossDomain:true,
+            error: function (jqXHR, exception) {
+                FailStatusResponse(jqXHR);
+            }
+          });
+    };
 
     DeleteDirection = (id) => {
-        
+
     }
 }
 
