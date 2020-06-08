@@ -48,13 +48,12 @@ class ApiUser extends React.Component {
         });
     };
 
-    CreateUser = (userToAdd,token) => {
+    CreateUser = (userToAdd) => {
         return $.ajax({
             url: this.uriApiUser + "AddUser",
             data: userToAdd,
             type: 'POST',
             contentType: 'application/json',
-            headers: {"Authorization": token},
             crossDomain: true,
             error: function (jqXHR, exception) {
                 FailStatusResponse(jqXHR);
