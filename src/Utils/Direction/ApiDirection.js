@@ -7,7 +7,7 @@ class ApiDirection extends React.Component {
     
     constructor() {
         super();
-        this.uriDirection = "http://service.user.com/Api/Directions/";
+        this.uriDirection = "http://local.user.service.com/Api/Directions/";
     }
     
     AddDirection = (data,token)=>{        

@@ -7,7 +7,7 @@ class ApiContactUser extends React.Component {
     
     constructor() {
         super();
-        this.uriUserContact = "http://service.user.com/Api/Contacts/";
+        this.uriUserContact = "http://local.user.service.com/Api/Contacts/";
     }
     
     AddUserContact = (data,token)=>{        

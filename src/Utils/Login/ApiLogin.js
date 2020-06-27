@@ -7,7 +7,7 @@ class ApiLogin extends React.Component {
     
     constructor() {
         super();
-        this.uriCheckLogin = "http://service.checkuser.com/Api/Users/";
+        this.uriCheckLogin = "http://local.login.service.com/Api/Users/";
     }
     
     CheckUser = (data)=>{        

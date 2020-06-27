@@ -6,7 +6,7 @@ class ApiUser extends React.Component {
 
     constructor() {
         super();
-        this.uriApiUser = "http://service.user.com/Api/Users/";
+        this.uriApiUser = "http://local.user.service.com/Api/Users/";
     }
 
     GetAllUsers = (token) => {
