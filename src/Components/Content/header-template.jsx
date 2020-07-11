@@ -3,6 +3,7 @@ import FormUser from '../Forms/form-index';
 import Home from '../Home/home-index';
 import Perfil from '../Users/template-user';
 import PageNotFound from './../pageNotFound';
+import Products from '../Products/ProductsTable';
 
 import {
     BrowserRouter as Router,
@@ -42,7 +43,7 @@ function Form(props) {
                     <Link to="/FormUser" className="nav-link">
                         <button className="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit">Registrate</button>
                     </Link>
-                </div>
+                </div>                
             </div>
         );
     };
@@ -81,9 +82,14 @@ export default (props) => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
+					<li className="nav-item active">
                             <Link to="/" className="nav-link">Home<span className="sr-only">
                                 (current)</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item active">
+                            <Link to="/Products" className="nav-link">Productos<span className="sr-only">
+                                </span>
                             </Link>
                         </li>
                     </ul>
@@ -94,6 +100,7 @@ export default (props) => {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/FormUser" component={FormUser} />
+                <Route path="/Products" component={Products} />
                 <Route path={"/Perfil"}>
                     {props.isLogged ? <Perfil values ={props} /> : <Home />}
                 </Route>

@@ -38,7 +38,6 @@ body #container{
 .customForm{
   margin-left: 10px !important;
   margin-top: 20px !important;
-
 }
 
 .customFooter {
@@ -118,4 +117,19 @@ input.upperCase{
 
 textarea {
   resize: none !important;
+}
+
+.Table {
+  border-spacing: 0px;
+  background: #fff;
+  box-shadow: 0 1px 0 0 rgba(22, 29, 37, 0.05);
+}
+.number{
+	text-align: right;
+}
+
+.Cell {
+  border: 1px solid #f4f6f8;
+  padding: 4px;
+  text-align: left;
 }
